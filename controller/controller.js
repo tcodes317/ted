@@ -49,9 +49,7 @@ exports.deleteMovies=(req, res)=>{
         res.status(200).json({
             status: "success",
             count: movies.length,
-            data: {
-                null
-            }
+            data: null
         })
     })
 }
@@ -75,9 +73,7 @@ exports.validate=(req, res)=>{
         res.status(200).json({
             status: "success",
             count: movies.length,
-            data: {
-                "validate body"
-            }
+            data: "Movies not validated"
         })
     }
 }
