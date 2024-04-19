@@ -3,6 +3,7 @@
 let Movies=require("./../Model/moviesSchema");
 let  asyncErrorHandler=require("./../Utils/asyncErrorHandler");
 let CustomError=require("./../Utils/CustomError");
+let ApiFeature=require("./../Utils/ApiFeatures");
 
 exports.getHighestRate=asyncErrorHandler(async(req, res, next)=>{
     req.query.limit = "5";
@@ -13,13 +14,19 @@ exports.getHighestRate=asyncErrorHandler(async(req, res, next)=>{
 
 exports.getAllMovies=asyncErrorHandler(async(req, res, next)=>{
     let getAllMovies=await Movies.find(req.params.id);
+
+    let feature=new ApiFeature(Movies.find(), req.query)
+                                            .filter()
+                                            .sort()
+                                            .limitFields()
+                                            .pagination()
     
+    let query=await feature;
+
     res.status(200).json({
         status: "success",
         count: Movies.length,
-        data: {
-            getAllMovies
-        }
+        data: query
     })
 })
 exports.getMovies=asyncErrorHandler(async(req, res, next)=>{
