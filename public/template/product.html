@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .prod-container{
+            position: relative;
+        }
+        .prod-container .prod-content{
+            display: flex;
+        }
+        .prod-container .prod-content .div-i{
+            width: 300px;
+            height: 300px;
+            margin-right: 10px;
+            border: 1px solid;
+        }
+        .prod-container .prod-content .div-i img{
+            width: 300px;
+            height: 300px;
+        }
+        .prod-container .prod-content .div-ii div{
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <a href="/?id={{id}}" hreflang="">
+        <div class="prod-container">
+            <div class="prod-content">
+                <div class="div-i">
+                    <img src="{{productImage}}" alt="" />
+                </div>
+                <div class="div-ii">
+                    <div>NAME: {{name}}</div>
+                    <div>COLOR: {{color}}</div>
+                    <div>ROM: {{ROM}}</div>
+                    <div>PRICE: {{price}}</div>
+                    <div>MODENAME{{modeName}}</div>
+                    <div>MODELNUMBER{{modelNumber}}</div>
+                    <div>SIZE: {{size}}</div>
+                    <div>CAMERA: {{camera}}</div>
+                    <div>DESCRIPTION: {{Description}}</div>
+                </div>
+            </div>
+        </div>
+    </a>
+</body>
+</html>
