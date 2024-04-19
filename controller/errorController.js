@@ -1,19 +1,34 @@
+const CustomError=require("./../Utils/CustomError")
 
-
-const devError=(res, error)=>{
-res.status(error.statusCode)
+let devError=(res, error)=>{
+res.status(error.statusCode).json({
+    status: error.status,
+    message: error.message,
+    stackTrace: error.stack,
+    error: error
+})
 }
-const castErrorHandler=(err)=>{
+let castErrorHandler=(err)=>{
+let msg=`Invalid value ${err.path}: ${err.value}`;
 
+return new CustomError(msg, 400);
 }
-const duplicateKeyErrorHandler=(err)=>{
+let duplicateKeyErrorHandler=(err)=>{
+    let name=value.keyValue.name;
+    let msg=`There is an existing movie name ${name}. Please, enter another name`;
 
+    return new CustomError(msg, 400);
 }
-const validationErrorHandler= (err)=>{
+let validationErrorHandler= (err)=>{
+    let error=Object.values(err.error).map(val => val.message);
+    let errorMessage=error.join(". ");
 
+    let msg=`Invalid input data ${errorMessage}`;
+
+    return new CustomError(msg, 400);
 }
-const prodError=(res, error)=>{
-
+let prodError=(res, error)=>{
+    let 
 }
 module.exports=(error, req, res, next)=>{
     error.statusCode = error.statusCode || 500;
