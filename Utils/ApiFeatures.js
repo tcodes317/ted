@@ -21,11 +21,24 @@ class ApiFeatures{
     }
     limitFields(){
         if(req.query.fields){
-            let 
+            let fields=req.query.fields.split(",").join(" ");
+            query=query.select(fields);
+        }
+        else{
+            query=query.select("-__v");
         }
     }
     pagination(){
+        let page=req.query.page * 1 || 1;
+        let limit = req.query.limit * 1 || 10;
+        let skip=skip(page - 1).limit(limit);
 
+        if(req.query.page){
+            query=query.skip(skip) * limit(limit);
+        }
+        else{
+            
+        }
     }
 }
 
