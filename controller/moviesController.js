@@ -113,6 +113,23 @@ exports.getMoviesByGenres=asyncErrorHandler(async(req, res)=>{
     let genres=req.params.id;
 
     let Movies=await Movies.aggregate([
-        {}
-    ])
+        {$unwind: "$genres"},
+        {$group: {
+            _id: "$genres",
+            moviesCount: {$sum: 1},
+            movies: {$push: "$name"}
+        }},
+        {$addFields: {genres: "$_id"}},
+        {$project: {_id: 0}},
+        {$sort: {moviesCount: -1}},
+        {$limit: 6},
+        {$project: {_id: 0}}
+    ]);
+    res.status(200).json({
+        status: "success",
+        count: Movies.length,
+        data: {
+            Movies
+        }
+    })
 })
