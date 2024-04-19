@@ -20,7 +20,7 @@ mongoose.connect(process.env.DB_URL, {
 /////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 
-let movies=require("./../data/data.json");
+let movies=fs.readFileSync("./../data/data.json");
 
 let importMovies=asyncErrorHandler(async(req, res)=>{
         let imMovies=await Movies.create(movies);

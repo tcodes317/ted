@@ -3,11 +3,14 @@ const app=express();
 let moviesRouter=require("./Router/moviesRouter");
 let globalErrorHandler=require("./../Utils/globalErrorHandler");
 let authRouter=require("./Router/authRouter");
+let morgan=require(morgan("dev"));
 
 app.use("/api/vi/movies", moviesRouter);
 app.use(express.json());
 app.use(express.static("./public"));
 app.use("/api/vi/userModel", authRouter)
+
+app.use(morgan("dev"));
 
 app.all("*", (req, res, next)=>{
 
@@ -19,6 +22,4 @@ app.all("*", (req, res, next)=>{
 
 app.use(globalErrorHandler);
 
-app.listen(4000, "127.0.0.1", ()=>{
-    console.log("Connected!")
-});
+module.exports=app;
