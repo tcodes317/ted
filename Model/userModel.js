@@ -20,7 +20,7 @@ let userModel=new mongoose.Schema({
         unique: true,
         trim: true
     },
-    photo: String,
+    // photo: String,
     password:{
         type: String,
         required: [true, "password is required"],
