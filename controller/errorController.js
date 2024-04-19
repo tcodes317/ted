@@ -28,7 +28,18 @@ let validationErrorHandler= (err)=>{
     return new CustomError(msg, 400);
 }
 let prodError=(res, error)=>{
-    let 
+    if(error.isOperational){
+        res.status(error.statusCode).json({
+            status: error.status,
+            message: err.message
+        })
+    }
+    else{
+        res.status(500).json({
+            status: error.status,
+            message: err.message
+        })
+    }
 }
 module.exports=(error, req, res, next)=>{
     error.statusCode = error.statusCode || 500;
