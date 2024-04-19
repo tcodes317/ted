@@ -5,3 +5,5 @@ let router=express.Router();
 let authController=require("./../controller/authController");
 
 router.route("/signup").post(authController.signup);
+
+module.exports=router;
